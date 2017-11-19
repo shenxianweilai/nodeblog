@@ -1,0 +1,99 @@
+body{
+	background-color: lightblue;
+	margin: 0;
+	padding: 0;
+}
+nav{
+	margin-top: 30px;
+	text-align: center;
+}
+.menu a{
+	padding: 10px;
+	text-decoration: none;
+    margin-bottom: 2px;
+}
+.menu a:hover{
+	font-size: 120%;
+	text-decoration:underline;
+}
+.menu a.focus{
+	font-size: 120%;
+	text-decoration: underline;
+}
+.clear{
+	padding: 100px;
+}
+.listBox{
+	display: block;
+	border-bottom: 1px solid #76aac6;
+	padding: 10px;
+}
+.mainLeft{
+	width: 60%;
+	padding: 10px 30px;
+	float: left;
+
+}
+
+.mainRight{
+	width: 30%;
+	float: right;
+}
+
+li{
+	list-style: none;
+	display: inline-block;
+	padding: 30px;
+}
+
+#messageContent{
+	width: 500px;
+	height: 150px;
+}
+#messageBtn{
+	width: 70px;
+	height: 40px;
+}
+.messageBox {
+	border: 1px solid #add7d1;
+	margin-bottom: 6px;
+	background: #add7d1;
+}
+.messageBox .name{
+	margin-bottom: 80px;
+}
+.messageBox .fl{
+	float: left;
+	margin: 15px;
+}
+.messageBox .fr{
+	float: right;
+	margin: 15px;
+}
+.messageBox .content{
+	margin-left: 15px;
+}
+
+input{
+    display: block;
+    width: 300px;
+    height: 32px;
+    border: none;
+    border-bottom: 2px solid #62866c;
+    border-radius: 3px;
+}
+
+button{
+    width: 80px;
+    height: 40px;
+}
+#captcha {
+    width: 300px;
+    display: inline-block;
+    margin-top: 5px;
+}
+#wait {
+    text-align: left;
+    color: #666;
+    margin-top: 0;
+}

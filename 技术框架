@@ -1,0 +1,149 @@
+技术框架
+node+express+mongodb
+
+
+第三方模块和中间件
+bodyparser 解析post请求数据
+cookies 读/写cookie
+swig 模板解析引擎
+mongoose 操作数据
+markdown markdown语法解析生成模块
+
+
+npm init  初始化一个package
+
+安装框架以及上面的第三方模块中间件
+npm install --save express
+
+
+项目结构分析
+db 数据库存储目录
+models 数据库模型文件目录
+public 公共文件目录（css js image）
+routers 路由文件目录
+schemas 数据库结构文件
+views 模板视图文件目录
+app.js 入口文件
+
+
+应用创建
+var express = require('express');
+var app = express();
+app.listen(8081);
+
+用户访问
+localhost:8081
+web后端根据用户访问的url处理不同的业务逻辑
+
+处理请求输出
+路由绑定 app.get('/', function(req, res, next){})  app.post()
+req：对象  保存客户端请求相关的一些数据 http.request
+res：对象  提供一些服务器输出相关的一些方法 http.response
+next：方法  用于执行下一个和路径匹配的函数
+
+内容输出
+res.send(string) 发送内容至客户端
+
+
+模板引擎的配置和使用
+模板的使用 后端逻辑和页面表现分离 前后端分离
+模板配置  
+var swig = require('swig');
+app.engine('html', swig.renderFile); 定义模板引擎，使用swig.renderFile方法解析后缀为html的文件
+app.set('views', './views');  设置模板存放目录
+app.set('view engine', 'html'); 注册模板引擎
+swig.setDefaults({cache:false}); 取消缓存
+
+
+静态文件托管
+app.use('/public', express.static(__dirname + '/public'));
+在public目录下划分并存放相关的静态资源文件
+
+
+用户发送http请求->url->解析路由->找到匹配规则->执行指定绑定函数，返回对应的内容至用户
+静态：/public ->静态->直接读取指定目录下的文件，返回给用户
+动态：处理业务逻辑，加载模板
+
+
+分块开发和实现
+划分模块
+根据功能进行模块划分 
+   前台模块     app.use('/admin', require('./routers/admin'));
+   后台管理模块 app.use('/api', require('./routers/api'));
+   api模块      app.use('/', require('./routers/main'));
+
+前台路由+模板
+main模块
+	/       首页
+	/view   内容页
+api模块
+	/    	    首页
+	/register   用户注册
+	/login		用户登录
+	/comment	评论获取
+	/comment/post 评论提交
+
+后台路由+模板
+admin模块
+	/				首页
+用户管理
+	/user			用户列表
+分类管理
+	/category 		分类列表
+	/category/add 	分类添加
+	/category/edit	分类修改
+	/category/delete分类删除
+文章内容管理
+	/article		内容列表
+	/article/add	内容添加
+	/article/edit	内容修改
+	/article/delete 内容删除
+评论内容管理
+	/comment		评论列表
+	/comment/delete 评论删除
+
+
+功能开发顺序
+	用户
+	栏目
+	内容
+	评论
+
+编码顺序
+	通过schema定义设计数据存储结构
+	功能逻辑
+	页面展示
+
+
+用户注册
+1.userschema结构设计
+	开启mongodb数据库   mongod --dbpath=数据文件保存路径
+	数据保存 使用mongoose操作数据库
+	创建model  通过schema创建模型类  mongoose.model('模型类名称',Schema)；
+2.注册界面
+3.注册逻辑
+	使用ajax方式实现注册
+	api接口编写
+
+
+后端
+bodyparser的使用
+
+基于数据库的验证
+
+使用cookie保持登录状态
+
+普通用户和管理员功能的实现
+
+后台管理功能及界面搭建
+模板继承
+
+
+分页
+limit(Number)
+
+
+
+
+添加富文本编辑或者markdown支持
+防止评论xss攻击
